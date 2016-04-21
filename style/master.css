@@ -1,0 +1,62 @@
+.container {
+  width: 400px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: red;
+  text-transform: uppercase;
+}
+
+#controls {
+  text-align: center;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 3em;
+}
+
+body{
+   background-color: rgb(40, 39, 39);
+   color: grey;
+}
+
+.langages{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.langages>div{
+    text-align: center;
+    margin: 0 5px 0 5px;
+}
+
+.langages img{
+    width: 25px;
+    height: 25px;
+}
+
+.language-autre{
+    width: 100%;
+    border: 1px solid grey;
+    background-color: transparent;
+    padding-left: 15px;
+    border-radius: 3px;
+    color: rgb(52, 223, 37);
+    font-weight: bold;
+}
+
+.select{
+    color: rgb(52, 223, 37);
+    font-weight: bold;
+}
+
+.tache-done{
+    display: flex;
+    justify-content: space-between;
+    -ms-align-items: center;
+    align-items: center;
+}
