@@ -4,7 +4,7 @@ session_start();
 
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '741741');
+    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', '', '');
 }
 catch(Exception $e)
 {
