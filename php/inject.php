@@ -4,7 +4,7 @@ session_start();
 
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '741741');
+    $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', '', '');
 }
 catch(Exception $e)
 {
@@ -16,7 +16,7 @@ $nbTaff = $_GET['nbTaff'];
 $tabLang = explode(" ", $_GET['lang'], 2);
 
 $_SESSION['nbTaff'] = intval($nbTaff);
-$_SESSION['repo'] = true;
+$_SESSION['repo'] = intval(1);
 
 if($tabLang[0] != ''){
     $lang1 = trim(htmlspecialchars(addslashes($tabLang[0])));
@@ -28,7 +28,7 @@ if($tabLang[1] != ''){
 }
 
 if($task != '' && $lang1 != '' && $lang2 != ''){
-    $req = $bdd->prepare('INSERT INTO pomodoro(lang1,lang2,task) VALUES (:lang1, :lang2, :task)');
+    $req = $bdd->prepare('INSERT INTO pomodoro(lang1,lang2,task, date_task) VALUES (:lang1, :lang2, :task, NOW())');
     $req->execute(array(
         'lang1' => $lang1,
         'lang2' => $lang2,
@@ -36,7 +36,7 @@ if($task != '' && $lang1 != '' && $lang2 != ''){
     ));
 }
 
-echo $task, $lang1, $lang2;
+echo $_SESSION['repo'];
 
 header('Location: ../index.php');
 

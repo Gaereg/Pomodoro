@@ -1,3 +1,5 @@
+<!-- Régler le probleme du repo true false -->
+
 <?php
     session_start();
 
@@ -6,11 +8,9 @@
         $_SESSION['repo'] = 0;
     }
 
-    session_start();
-
     try
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '741741');
+        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', '', '');
     }
     catch(Exception $e)
     {
@@ -47,7 +47,8 @@
         }
 
         function isRepo(){
-            "<?php $_SESSION['repo'] = 0 ?>"
+            "<?php $_SESSION['repo'] = 0; ?>"
+            sessionRepo = false;
         }
     </script>
     <!--Titre-->
@@ -57,6 +58,7 @@
 
 <body>
     <header>
+        <?php echo $_SESSION['repo'] ?>
     </header>
 
     <main ng-controller="MainCtrl">
@@ -95,7 +97,29 @@
             </div>
             <h2>Done {{heureTaf}}h{{minTaf}}</h2>
             <ul id="done" class="list-group">
+                <?php
 
+                    $tacheDay = $bdd->query("SELECT lang1, lang2, task, date_task FROM pomodoro ORDER BY date_task DESC");
+
+                    while ($donnees = $tacheDay->fetch()) {
+                ?>
+                    <li class='tache-done list-group-item'>
+                        <div>
+                            <?php echo $donnees['lang1']; ?>
+                            <?php
+                                if($donnees['lang2'] != "Nothing"){
+                                    ?>/ <?php
+                                    echo $donnees['lang2'];
+                                }
+                            ?>
+                        </div>
+                        <div>
+                            <?php echo $donnees['task'];
+                                echo $donnees['date_task']?>
+                        </div>
+                    </li>
+                    <?php } ?>
+                 ?>
             </ul>
         </div>
     </main>

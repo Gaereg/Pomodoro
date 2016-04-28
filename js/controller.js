@@ -54,6 +54,10 @@ app.controller('MainCtrl', function($scope, $interval) {
 
     var done = angular.element(document.getElementById('done'));
 
+    if($scope.repo === true){
+        playTime = $interval(function(){ $scope.time(); }, 1000);
+    }
+
     $scope.time = function(){
         if($scope.timer.secondes === 0 && $scope.timer.minutes > 0){ // Quand les seconde sont a zéro, minute -1
             --$scope.timer.minutes;
@@ -91,7 +95,6 @@ app.controller('MainCtrl', function($scope, $interval) {
             alert('Fini la pause');
             $scope.stop();
             $scope.repo = false;
-            isRepo();
         }
 
         if ($scope.repo){ //Créer une chaine de caractère en fonction de si on est au boulot ou en pause
@@ -121,9 +124,7 @@ app.controller('MainCtrl', function($scope, $interval) {
         $scope.timer.secondes = 0;
         $scope.isPlay = false;
         $interval.cancel(playTime);
-    };
-
-    $scope.reprise = function(){
-        $scope.nbTaff = test;
+        $scope.work = '';
+        isRepo();
     };
 });
