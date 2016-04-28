@@ -1,3 +1,9 @@
+<?php
+    session_start();
+
+    $_SESSION['nbTaff'] = 5;
+ ?>
+
 <!doctype html>
 <html lang="fr" ng-app="pomoApp">
 <head>
@@ -6,18 +12,26 @@
     <meta name    = "author" content      = "Gaereg">
     <meta name    = "description" content = "Pomodoro">
     <!--link externe-->
-    <link rel     = "stylesheet" href     = "bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src = "bower_components/angular/angular.min.js"></script>
+
 
     <!-- Font -->
 
     <!--link interne-->
-    <link rel     ="stylesheet" href="style/master.css">
+    <link rel     ="stylesheet" href="../style/master.css">
 
-    <script src = "js/app.js"></script>
-    <script src = "js/controller.js"></script>
+
     <!--Titre-->
     <title>Pomodoro</title>
+    <script>
+
+        var temp = '<?php echo $_SESSION['nbTaff'] ?>';
+        if(isNaN(temp)){
+            $scope.timer.nbTaff = temp;
+        } else {
+            test = 0;
+        }
+        console.log(temp)
+    </script>
 </head>
 
 <body>
@@ -28,6 +42,7 @@
         <div class="container">
             <h1>My pomodoro app</h1>
             <h2>Doing</h2>
+                
             <h3>Languages :</h3>
             <div class="langages">
                 <div class="icon-name" ng-repeat="language in languages" ng-click="languageSelect()">
@@ -35,13 +50,13 @@
                     <p ng-class="{select: language.select}">{{language.name}}</p>
                 </div>
             </div>
-            <input class="language-autre" ng-model="languageInput" ng-blur="languageAutre()" ng-hide="nbLanguage >= 2 && languageInput == ''" type="text" placeholder="autre">
+            <input class="language-autre" ng-model="languageInput" ng-blur="languageAutre()" ng-hide="nbLanguage >= 2 && languageInput == ''" type="text" placeholder="autre" maxlength="50">
 
             <form ng-submit="play()">
                 <div class="form-group">
 
                     <label for="task"></label>
-                    <input type="text" id="task" class="form-control" ng-model="task" autocomplete="off" placeholder="Commentaire">
+                    <input type="text" id="task" class="form-control" ng-model="task" autocomplete="off" placeholder="Commentaire" maxlength="200">
                 </div>
             </form>
             <div id="controls">
@@ -64,6 +79,7 @@
 
     <footer>
     </footer>
+
     <!-- Script -->
 </body>
 </html>
