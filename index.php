@@ -10,7 +10,7 @@
 
     try
     {
-        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', '', '');
+        $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '741741');
     }
     catch(Exception $e)
     {
@@ -98,8 +98,9 @@
             <h2>Done {{heureTaf}}h{{minTaf}}</h2>
             <ul id="done" class="list-group">
                 <?php
-
-                    $tacheDay = $bdd->query("SELECT lang1, lang2, task, date_task FROM pomodoro ORDER BY date_task DESC");
+                    $dateduJour = date("Y-m-d");
+                    echo $dateduJour;
+                    $tacheDay = $bdd->query("SELECT lang1, lang2, task, date_task FROM pomodoro WHERE date_task = $dateduJour ORDER BY date_task DESC");
 
                     while ($donnees = $tacheDay->fetch()) {
                 ?>
@@ -119,7 +120,6 @@
                         </div>
                     </li>
                     <?php } ?>
-                 ?>
             </ul>
         </div>
     </main>
