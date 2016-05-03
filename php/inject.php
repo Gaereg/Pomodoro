@@ -28,7 +28,7 @@ if($tabLang[1] != ''){
 }
 
 if($task != '' && $lang1 != '' && $lang2 != ''){
-    
+
     $req = $bdd->prepare('INSERT INTO pomodoro(lang1,lang2,task, date_task) VALUES (:lang1, :lang2, :task, NOW())');
     $req->execute(array(
         'lang1' => $lang1,
@@ -37,5 +37,5 @@ if($task != '' && $lang1 != '' && $lang2 != ''){
     ));
 }
 
-
+header('Location: ../index.php');
 ?>

@@ -1,5 +1,3 @@
-<!-- Régler le probleme du repo true false -->
-
 <?php
     session_start();
 
@@ -98,10 +96,14 @@
             <h2>Done {{heureTaf}}h{{minTaf}}</h2>
             <ul id="done" class="list-group">
                 <?php
-                    $dateduJour = date("Y-m-d");
-                    echo $dateduJour;
-                    $tacheDay = $bdd->query("SELECT lang1, lang2, task, date_task FROM pomodoro WHERE date_task = $dateduJour ORDER BY date_task DESC");
-
+                    $dateduJour = strval(date("Y-m-d"));
+                    $dateduJour .= ' 00:00:00';
+                    if($dateduJour === '2016-04-29 00:00:00'){
+                        echo 'true';
+                    }
+                    $tacheDay = $bdd->prepare("SELECT lang1, lang2, task, date_task FROM pomodoro WHERE date_task >= :dateDays ORDER BY date_task DESC");
+                    $tacheDay->bindParam('dateDays', $dateduJour, PDO::PARAM_STR);
+                    $tacheDay->execute();
                     while ($donnees = $tacheDay->fetch()) {
                 ?>
                     <li class='tache-done list-group-item'>
@@ -115,8 +117,7 @@
                             ?>
                         </div>
                         <div>
-                            <?php echo $donnees['task'];
-                                echo $donnees['date_task']?>
+                            <?php echo $donnees['task'];?>
                         </div>
                     </li>
                     <?php } ?>
