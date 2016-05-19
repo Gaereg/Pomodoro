@@ -1,10 +1,6 @@
-.container {
-  width: 400px;
-  margin: 0 auto;
-}
+
 
 h1 {
-  color: red;
   text-transform: uppercase;
 }
 
@@ -15,6 +11,10 @@ h1 {
 .time {
   font-weight: bold;
   font-size: 3em;
+}
+
+.pomo{
+    margin-bottom: 50px;
 }
 
 body{
@@ -59,4 +59,16 @@ body{
     justify-content: space-between;
     -ms-align-items: center;
     align-items: center;
+}
+
+.date-historique{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.flecheTime:hover{
+    color: rgb(52, 223, 37);
+    cursor: pointer;
 }
